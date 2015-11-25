@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Analytics Games";
+}
+<img src="@ViewBag.ImageUrl" />
+<a href="#" class="goToPlayer btn btn-primary">Go To Player</a>
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+
+        $.connection.playerHub.client.goto_run = function () {
+            window.location.href = '@Url.Action("Run", "Game", new { id = ViewBag.GameId })';
+        };
+        $.connection.playerHub.logging = true;
+        $.connection.hub.start();
+
+        $(".goToPlayer").click(function () {
+            window.open('@ViewBag.CallBackUrl');
+        });
+
+    </script>
+
+}

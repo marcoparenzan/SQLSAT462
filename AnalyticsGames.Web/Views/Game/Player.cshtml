@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Analytics Games";
+}
+<h2>@ViewBag.gameId</h2>
+<a href="#" class="left btn btn-primary" style="width:150px; height:150px;">Left</a>
+<a href="#" class="right btn btn-primary" style="width:150px; height:150px;">Right</a>
+<script type="text/javascript">
+    $.ajax(
+        '/api/Player/Start?id=@ViewBag.gameId'
+        , {
+            method: "POST"
+        }
+    ).done(function (result) {
+    });
+
+    $(".left").click(function () {
+        $.ajax(
+            '/api/Player/Left?id=@ViewBag.gameId'
+            , {
+                method: "POST"
+            }
+        ).done(function (result) {
+        });
+    });
+
+    $(".right").click(function () {
+        $.ajax(
+        '/api/Player/Right?id=@ViewBag.gameId'
+        , {
+            method: "POST"
+        }
+        ).done(function (result) {
+        });
+    });
+
+</script>
