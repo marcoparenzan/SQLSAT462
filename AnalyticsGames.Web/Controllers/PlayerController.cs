@@ -14,23 +14,25 @@ namespace AnalyticsGames.Web.Controllers
     public class PlayerController : ApiController
     {
         [HttpPost]
-        public void Run(string id)
-        {
-        }
-
-        [HttpPost]
         public void Start(string id)
         {
-            PlayerHub.Default.Clients.All.goto_run();
+            PlayerHub.Default.Clients.All.goto_run(id);
+            // PlayerHub.GoToRun(Guid.Parse(id));
         }
 
         [HttpPost]
         public void Left(string id)
         {
-            Send(id, "left");
+            Command(id, "left");
         }
 
-        private void Send(string id, string command)
+        [HttpPost]
+        public void Right(string id)
+        {
+            Command(id, "right");
+        }
+
+        private void Command(string id, string command)
         {
             var client = EventHubClient.CreateFromConnectionString(ConfigurationManager.AppSettings["PlayerRun"], "PlayerRun");
             var json = JsonConvert.SerializeObject(new { gameId = id, command = command });
@@ -38,12 +40,6 @@ namespace AnalyticsGames.Web.Controllers
             var data = new EventData(bytes);
 
             client.Send(data);
-        }
-
-        [HttpPost]
-        public void Right(string id)
-        {
-            Send(id, "right");
         }
     }
 }

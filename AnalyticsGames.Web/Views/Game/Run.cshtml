@@ -3,3 +3,19 @@
 }
 <h2>@ViewBag.gameId</h2>
 <h1>Run</h1>
+<h2 class="count"></h2>
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+
+        $.connection.playerHub.client.player_stat = function (message) {
+            $(".count").html(message.Count);
+        };
+        $.connection.playerHub.logging = true;
+        $.connection.hub.start();
+
+    </script>
+
+}
