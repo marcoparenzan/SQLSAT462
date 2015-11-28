@@ -11,7 +11,7 @@ namespace AnalyticsGames.Web.Controllers
             var callBackUrl = $"{Request.Url.Scheme}://{Request.Url.Authority}{Url.Action("Player", "Game", new { id = gameId })}";
             ViewBag.GameId = gameId;
             ViewBag.CallBackUrl = callBackUrl;
-            ViewBag.ImageUrl = $"https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data={Uri.EscapeUriString(callBackUrl)}&qzone=1&margin=0&size=600x600&ecc=L&format=png";
+            ViewBag.ImageUrl = $"https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data={Uri.EscapeUriString(callBackUrl)}&qzone=1&margin=0&size=400x400&ecc=L&format=png";
             return View();
         }
 
