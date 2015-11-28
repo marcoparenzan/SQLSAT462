@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link href="~/Content/forkmeongithub.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -12,6 +13,9 @@
     @RenderSection("include", required: false)
 </head>
 <body>
+    <div class="ribbon right blue" style="z-index:10000;">
+        <a href="https://github.com/marcoparenzan/SQLSAT462">Fork me on GitHub</a>
+    </div>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

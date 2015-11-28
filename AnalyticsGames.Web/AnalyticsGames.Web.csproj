@@ -220,6 +220,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\forkmeongithub.css" />
     <Content Include="Content\game\assets\images\city-silhouette.png" />
     <Content Include="Content\game\assets\images\ground.png" />
     <Content Include="Content\game\assets\images\preloader-bar.png" />
