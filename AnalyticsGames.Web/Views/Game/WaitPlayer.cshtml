@@ -13,7 +13,9 @@
             window.location.href = '@Url.Action("Run", "Game", new { id = ViewBag.GameId })';
         };
         $.connection.playerHub.logging = true;
-        $.connection.hub.start();
+        $.connection.hub.start().done(function () {
+            $.connection.playerHub.server.RegisterGame('@ViewBag.GameId');
+        });
 
         $(".goToPlayer").click(function () {
             window.open('@ViewBag.CallBackUrl');

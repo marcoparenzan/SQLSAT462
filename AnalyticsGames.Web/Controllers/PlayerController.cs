@@ -16,8 +16,7 @@ namespace AnalyticsGames.Web.Controllers
         [HttpPost]
         public void Start(string id)
         {
-            PlayerHub.Default.Clients.All.goto_run(id);
-            // PlayerHub.GoToRun(Guid.Parse(id));
+            PlayerHub.GoToRun(id);
         }
 
         [HttpPost]

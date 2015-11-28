@@ -17,8 +17,7 @@ namespace AnalyticsGames.Web.Controllers
         [HttpPost]
         public void Player(PlayerStat stat)
         {
-            PlayerHub.Default.Clients.All.player_stat(stat);
-            // PlayerHub.PlayerStat(stat);
+            PlayerHub.PlayerStat(stat);
         }
     }
 }

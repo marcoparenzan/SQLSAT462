@@ -1,36 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Analytics Games";
-}
-<h2>@ViewBag.gameId</h2>
-<a href="#" class="left btn btn-primary" style="width:150px; height:150px;">Left</a>
-<a href="#" class="right btn btn-primary" style="width:150px; height:150px;">Right</a>
-<script type="text/javascript">
-    $.ajax(
-        '/api/Player/Start?id=@ViewBag.gameId'
-        , {
-            method: "POST"
-        }
-    ).done(function (result) {
-    });
+﻿<div style="margin:10px;">
+    <h2>GameId: @ViewBag.gameId</h2>
+    <span id="speedGaugeContainer"></span>
+    <span id="playersGaugeContainer"></span>
+    <a href="#" class="left btn btn-primary" style="width:150px; height:150px;">Left</a>
+    <a href="#" class="right btn btn-primary" style="width:150px; height:150px;">Right</a>
+</div>
+@section include {
+    <script type="text/javascript" src="~/content/game/js/d3.v2.js"></script>
+    <script type="text/javascript" src="~/content/game/js/gauge.js"></script>
 
-    $(".left").click(function () {
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs"></script>
+}
+@section scripts {
+    <script type="text/javascript">
+
+        var speedGauge = createGauge("speed", "Speed", 500);
+        var playersGauge = createGauge("players", "Players", 15);
+
+        speedGauge.redraw(0);
+        playersGauge.redraw(1);
+
+        $.connection.playerHub.client.player_stat = function (message) {
+            speedGauge.redraw(message.Count);
+        };
+        $.connection.playerHub.logging = true;
+        $.connection.hub.start().done(function () {
+            $.connection.playerHub.server.RegisterGame('@ViewBag.GameId');
+        });
+
         $.ajax(
-            '/api/Player/Left?id=@ViewBag.gameId'
+            '/api/Player/Start?id=@ViewBag.gameId'
             , {
                 method: "POST"
             }
         ).done(function (result) {
         });
-    });
 
-    $(".right").click(function () {
-        $.ajax(
-        '/api/Player/Right?id=@ViewBag.gameId'
-        , {
-            method: "POST"
-        }
-        ).done(function (result) {
+        $(".left").click(function () {
+            $.ajax(
+                '/api/Player/Left?id=@ViewBag.gameId'
+                , {
+                    method: "POST"
+                }
+            ).done(function (result) {
+            });
         });
-    });
 
-</script>
+        $(".right").click(function () {
+            $.ajax(
+            '/api/Player/Right?id=@ViewBag.gameId'
+            , {
+                method: "POST"
+            }
+            ).done(function (result) {
+            });
+        });
+
+    </script>
+}

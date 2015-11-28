@@ -1,21 +1,52 @@
-﻿@{
-    ViewData["Title"] = "Analytics Games";
-}
-<h2>@ViewBag.gameId</h2>
-<h1>Run</h1>
-<h2 class="count"></h2>
-@section scripts {
+﻿<div style="margin:50px;">
+    <h2>GameId: @ViewBag.gameId</h2>
+    <span id="speedGaugeContainer"></span>
+    <span id="game" style="display: inline-block;"></span>
+    <span id="playersGaugeContainer"></span>
+</div>
+@section include {
+    <script type="text/javascript" src="~/content/game/js/d3.v2.js"></script>
+    <script type="text/javascript" src="~/content/game/js/gauge.js"></script>
+    <script type="text/javascript" src="~/content/game/js/phaser.js"></script>
+    <script type="text/javascript" src="~/content/game/js/Boot.js"></script>
+    <script type="text/javascript" src="~/content/game/js/Preload.js"></script>
+    <script type="text/javascript" src="~/content/game/js/Game.js"></script>
+
     <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="~/signalr/hubs"></script>
-
+}
+@section scripts {
     <script type="text/javascript">
 
+        var speedGauge = createGauge("speed", "Speed", 500);
+        var playersGauge = createGauge("players", "Players", 15);
+
+        speedGauge.redraw(0);
+        playersGauge.redraw(1);
+
+        var InfiniteScroller = InfiniteScroller || {};
+
+        InfiniteScroller.game = new Phaser.Game(640, 480, Phaser.CANVAS, "game");
+
+        var velocityX = 0;
+
+        InfiniteScroller.game.state.add('Boot', InfiniteScroller.Boot);
+        InfiniteScroller.game.state.add('Preload', InfiniteScroller.Preload);
+        InfiniteScroller.game.state.add('Game', InfiniteScroller.Game);
+        InfiniteScroller.game.externalUpdate = function (state) {
+            state.velocityX = velocityX;
+            speedGauge.redraw(velocityX);
+        };
+
+        InfiniteScroller.game.state.start('Boot');
+
         $.connection.playerHub.client.player_stat = function (message) {
-            $(".count").html(message.Count);
+            velocityX = message.Count;
         };
         $.connection.playerHub.logging = true;
-        $.connection.hub.start();
+        $.connection.hub.start().done(function () {
+            $.connection.playerHub.server.RegisterGame('@ViewBag.GameId');
+        });
 
     </script>
-
 }

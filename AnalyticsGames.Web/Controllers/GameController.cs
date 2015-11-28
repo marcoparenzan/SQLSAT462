@@ -18,14 +18,14 @@ namespace AnalyticsGames.Web.Controllers
         [HttpGet]
         public ActionResult Player(string id)
         {
-            ViewBag.gameId = id;
+            ViewBag.GameId = id;
             return View();
         }
 
         [HttpGet]
         public ActionResult Run(string id)
         {
-            ViewBag.gameId = id;
+            ViewBag.GameId = id;
             return View();
         }
     }

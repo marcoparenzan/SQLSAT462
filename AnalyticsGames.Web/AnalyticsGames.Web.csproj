@@ -220,6 +220,18 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\game\assets\images\city-silhouette.png" />
+    <Content Include="Content\game\assets\images\ground.png" />
+    <Content Include="Content\game\assets\images\preloader-bar.png" />
+    <Content Include="Content\game\assets\images\running.png" />
+    <Content Include="Content\game\assets\images\running1.png" />
+    <Content Include="Content\game\js\Boot.js" />
+    <Content Include="Content\game\js\d3.v2.js" />
+    <Content Include="Content\game\js\Game.js" />
+    <Content Include="Content\game\js\gauge.js" />
+    <Content Include="Content\game\js\main.js" />
+    <Content Include="Content\game\js\phaser.js" />
+    <Content Include="Content\game\js\Preload.js" />
     <Content Include="Content\images\ASP-NET-Banners-01.png" />
     <Content Include="Content\images\ASP-NET-Banners-02.png" />
     <Content Include="Content\images\Banner-01-Azure.png" />
@@ -235,6 +247,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\game\assets\images\running1.pdn" />
     <None Include="Properties\PublishProfiles\analyticsgames.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
